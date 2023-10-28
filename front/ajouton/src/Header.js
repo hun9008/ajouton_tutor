@@ -10,6 +10,9 @@ function Header() {
     const CreateLink = () => {
             navigate("/login");
           };
+    const Landing = () => {
+            navigate("/");
+          }
 
  
 
@@ -17,8 +20,7 @@ function Header() {
     const headerStyle = {
         background: "#405678",
         display: "flex",
-        width: "100%",  // 유연하게 화면 전체 폭을 사용
-    maxWidth: "1440px",
+        width: "100vw",  // 유연하게 화면 전체 폭을 사용
         height: "50px",
         padding: "30px 1245px 24px 43px",
         alignItems: "center",
@@ -46,12 +48,13 @@ function Header() {
         style: "normal",
         weight: "700",
         lineheight: "16px",
+        marginLeft: "1089px"
 
     }
 
     return (
         <div style={headerStyle}>
-            <img style={img} src={AMENTO} alt="AMENTO" /> 
+            <img onClick={Landing} style={img} src={AMENTO} alt="AMENTO" /> 
 
 
             <div style={subMenu}>
