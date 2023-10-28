@@ -10,10 +10,7 @@ function Header() {
             navigate("/");
           };
 
-    const PDFdownload = () => {
-       navigate("/MentorReport");
-    };
-   
+ 
 
 
     const headerStyle = {
@@ -56,8 +53,8 @@ function Header() {
 
 
             <div style={subMenu}>
-            <p onClick={CreateLink}>예약 링크 생성</p>
-            <p onClick={PDFdownload}>활동일지 다운로드</p>
+            <p onClick={CreateLink}>튜터링 등록</p>
+
             </div>
 
         </div>
