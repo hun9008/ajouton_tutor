@@ -25,15 +25,15 @@ function ToutorApplication() {
             setLocation(''); 
         }
     }
-
+    const sbjCode = "SCE214";
 
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
-        if (isFormComplete() && !isSubmitted) {
-            navigate("/SuccApply");
-        }
-    };
+    // const handleSubmit = () => {
+    //     if (isFormComplete() && !isSubmitted) {
+    //         navigate("/SuccApply");
+    //     }
+    // };
 
     const [trainingLog, setTrainingLog] = useState([]);  // State for storing the response
 
@@ -41,7 +41,7 @@ function ToutorApplication() {
         const url = "https://pass.kksoft.kr:15823/v1/api/getReservations";
         const payload = {
             id: studentNumber,  // Using the studentNumber state
-            sbjCode: "SCE214"
+            sbjCode: sbjCode
         };
 
         axios.post(url, payload)
@@ -53,6 +53,29 @@ function ToutorApplication() {
                 console.error("Error fetching data:", error);
             });
     };
+
+    const handleSubmitClick = () => {
+        const url = "https://pass.kksoft.kr:15823/v1/api/submit";
+        const payload = {
+            studentNumber: studentNumber,
+            date: date,
+            time: time,
+            question: question,
+            locationType: locationType,
+            location: location,
+            sbjCode: sbjCode,
+        };
+
+        axios.post(url, payload)
+            .then(response => {
+                console.log(response);
+                navigate("/SuccApply");
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    };
+
     
     return (
         <div>
@@ -169,7 +192,7 @@ function ToutorApplication() {
                 <button 
                 className={`button2 ${isFormComplete() ? 'active' : ''}`} 
                 disabled={!isFormComplete() || isSubmitted}
-                onClick={handleSubmit}
+                onClick={ handleSubmitClick }
                  >
                 {isFormComplete() ? '신청하기' : '비활성화'}
                 </button>
