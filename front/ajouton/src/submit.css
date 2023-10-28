@@ -1,0 +1,143 @@
+.container {
+  width: 600px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+h2 {
+  color: var(--title, #19212F);
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+p {
+  color: var(--text, #4D4D4D);
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 166.667% */
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+.file-display-container {
+  display: flex;
+  align-items: center;
+}
+
+.file-display {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.remove-button {
+  background-color: transparent;
+  border: none;
+  color: #aaa;  /* 기본 버튼 색상을 약간의 회색으로 설정 */
+  cursor: pointer;  /* 마우스 포인터를 손가락 모양으로 변경 */
+  transition: color 0.3s;  /* 색상 변경 효과 지속 시간 설정 */
+}
+
+.remove-button:hover {
+  color: #777;  /* 마우스를 올렸을 때 색상을 좀 더 진하게 설정 */
+}
+
+.file-placeholder {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.actions {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+}
+
+.save-btn{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  margin-right: 10px;
+}
+
+/* 파일 이름에 밑줄 추가 및 hover 시 흐릿하게 */
+.file-name {
+  cursor: pointer;
+  text-decoration: underline; /* 밑줄 추가 */
+  transition: opacity 0.3s;
+}
+
+.file-name:hover {
+  opacity: 0.7;
+}
+
+/* 수정일자와 용량 */
+.file-details {
+  font-size: 0.7em;  /* 폰트 사이즈를 조금 더 작게 설정 */
+  color: #999;      /* 연한 회색 */
+  margin-left: 10px; /* 약간의 간격 추가 */
+  text-decoration: none;  /* 밑줄 제거 */
+}
+
+.positioned-container {
+  position: relative;
+}
+
+.absolute-button {
+  position: absolute;
+  top: 0;  /* 버튼을 컨테이너의 아래쪽에 고정합니다 */
+  right: 0;  /* 선택적으로 버튼을 컨테이너의 오른쪽에 위치시킵니다 */
+}
