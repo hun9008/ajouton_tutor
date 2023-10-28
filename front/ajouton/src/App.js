@@ -3,11 +3,12 @@ import Login from './login';
 import './App.css';
 import TutorApplication from './TutorApplication';
 import MentorReport from './MentorReport';
+import Header from './Header';
 
 function App() {
   return (
     <div className="App">
-      
+      <Header />
 
       <Router>
         <Routes>
