@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-// import axios from 'axios';
+import { useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+// import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const App = () => {
     const [name, setName] = useState('');
@@ -14,29 +15,29 @@ const App = () => {
         setDownloaded(true);
     };
 
-    // const [token, setToken] = useState('');
+    const [sendData, setSendData] = useState(false);
 
-    // const handleGoogleSuccess = async (response) => {
-    //     try {
-    //         // Use the authorization code to get the access and refresh tokens
-    //         const result = await axios.post('https://oauth2.googleapis.com/token', {
-    //             code: response.code,
-    //             client_id: '188993087518-sgpan8fbqrn6kfv9huu9j2rumgr536pu.apps.googleusercontent.com',
-    //             client_secret: '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',
-    //             redirect_uri: 'http://localhost:3000/',
-    //             grant_type: 'authorization_code',
-    //         });
-
-    //         const { access_token, refresh_token } = result.data;
-
-    //         console.log('Access Token:', access_token);
-    //         console.log('Refresh Token:', refresh_token);
-
-    //         setToken(access_token);
-    //     } catch (error) {
-    //         console.error('Error getting tokens:', error.response);
-    //     }
-    // };
+    useEffect(() => {
+        if (sendData) {
+            const backendURL = "https://backendurl.com/register";  // Replace with actual backend URL
+            const data = {
+                name: name,
+                email: email,
+                className: className,
+                classInfo: classInfo,
+                downloaded: downloaded
+            };
+            axios.post(backendURL, data)
+                .then(response => {
+                    console.log("Data sent successfully:", response.data);
+                    setSendData(false);  // Reset after sending
+                })
+                .catch(error => {
+                    console.error("Error sending data:", error);
+                    setSendData(false);  // Reset even if there's an error
+                });
+        }
+    }, [sendData, name, email, className, classInfo, downloaded]);
   
 
     return (
@@ -82,26 +83,9 @@ const App = () => {
             <br/>
             <div style={{marginRight:320 ,fontWeight: 'bold', fontSize: 20}}>구글 캘린더</div>
             <br/>
-            <GoogleOAuthProvider
-                clientId="188993087518-sgpan8fbqrn6kfv9huu9j2rumgr536pu.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                scope="https://www.googleapis.com/auth/calendar">
-                <div>
-                <GoogleLogin
-                    responseType="code"
-                    onSuccess={(credentialResponse) => {
-                        console.log(credentialResponse)
-                        console.log('Token:', credentialResponse.access_token);
-                    }}
-                    // onSuccess={handleGoogleSuccess}
-                    onError={() =>{
-                        console.log('login fail');
-                    }}
-                    width="300px"
-                    useOnTap
-                />
-                </div>
-            </GoogleOAuthProvider>
+            <a href="https://pass.kksoft.kr:15823/v1/api/calendar/login" target="_blank" rel="noopener noreferrer">
+                <button style={{ width: "300px", height: "40px" }}>Calendar Login</button>
+            </a>
             <br/>
             <div style={{marginRight:330, fontWeight: 'bold', fontSize: 20}}>튜티 정보</div>
             {downloaded ? (
@@ -111,7 +95,7 @@ const App = () => {
                     엑셀 다운로드
                 </a>
             )}
-            <button style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }}>
+            <button style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }} onClick={() => setSendData(true)}>
                 등록하기
             </button>
 
