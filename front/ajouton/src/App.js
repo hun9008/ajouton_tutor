@@ -1,7 +1,10 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import React, { useEffect } from 'react';
-
+<<<<<<< HEAD
+import Login from './login';
+import Submit from './submit'; // Submit 컴포넌트를 임포트
+import './App.css';
+import './submit.css';
+=======
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import Login from './login';
@@ -11,40 +14,14 @@ import Header from './Header';
 import SuccApply from './SuccApply';
 import SuccJoin from './SuccJoin';
 import LandgingPage from './LandingPage';
-import Random from './Random';
-
-function ServeyPage() {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const randomString = queryParams.get('randomString');
-
-  console.log("Parsed randomString:", randomString);
-
-
-  useEffect(() => {
-    // 백엔드 서버로 랜덤 파라미터 변수 보내기
-    axios.post('https://your-backend-server.com/api/save-random', {
-      randomString: randomString
-    })
-    .then(response => {
-      console.log("Random string saved successfully:", response.data);
-    })
-    .catch(error => {
-      console.error("Error saving random string:", error);
-    });
-  }, [randomString]);
-
-
-  return (
-    <div>
-      Received Random String: {randomString}
-    </div>
-  );
-}
 
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
+      <Login />
+      <Submit />
+=======
       <Router>
         <Header />
         <Routes>
@@ -58,6 +35,7 @@ function App() {
           <Route path='/servey' element={<ServeyPage />} />
         </Routes>
       </Router>
+>>>>>>> 84cd41d596aab73f245df41754990733aefa5beb
     </div>
   );
 }
