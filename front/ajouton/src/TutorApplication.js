@@ -10,15 +10,17 @@ function ToutorApplication() {
     const [location, setLocation] = useState(''); // If offline is selected
     const [question, setQuestion] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [locationType, setLocationType] = useState('');
 
     const isFormComplete = () => {
-        return studentNumber && date && time && ((isOfflineSelected && location) || !isOfflineSelected) && question;
+        // locationType이 설정되어 있는지 확인
+        return studentNumber && date && time && locationType && ((locationType === 'offline' && location) || locationType === 'online') && question;
     };
 
     const handleOfflineChange = (e) => {
         setIsOfflineSelected(e.target.checked);
         if (!e.target.checked) {
-            setLocation(''); // Reset location if offline is unchecked
+            setLocation(''); 
         }
     }
 
@@ -89,23 +91,32 @@ function ToutorApplication() {
                     onChange={e => setTime(e.target.value)}
                     />
 
-                    <p className='menu'>장소</p>
-                    <div>
-                        <label>
-                            <input className='checkbox' type="checkbox" value="online" />
-                            온라인
-                        </label>
-                        <label>
-                        <input 
-                            className='checkbox' 
-                            type="checkbox" 
-                            value="offline"
-                            onChange={handleOfflineChange}
-                        />
-                        오프라인
-                    </label>
+<p className='menu'>장소</p>
+                <div>
+                <label>
+                    <input 
+                        className='radio' 
+                        type="radio" 
+                        name="location" 
+                        value="online" 
+                        checked={locationType === "online"}
+                        onChange={() => setLocationType("online")}
+                    />
+                    온라인
+                </label>
+                <label>
+                    <input 
+                        className='radio' 
+                        type="radio" 
+                        name="location" 
+                        value="offline" 
+                        checked={locationType === "offline"}
+                        onChange={() => setLocationType("offline")}
+                    />
+                    오프라인
+                </label>
                 </div>
-                {isOfflineSelected && (
+                      {locationType === "offline" && (
                     <div>
                         <p className='menu'>장소 추가</p>
                         <input 
@@ -117,14 +128,15 @@ function ToutorApplication() {
                         />
                     </div>
                 )}
-                    <p className='menu' >질문 내용</p>
-                    <input 
+                
+                <p className='menu'>질문 내용</p>
+                <input 
                     className='qtext' 
                     type="text" 
                     placeholder="질문 내용을 입력하세요"
                     value={question}
                     onChange={e => setQuestion(e.target.value)}
-                    />
+                />
 
                     
                    
