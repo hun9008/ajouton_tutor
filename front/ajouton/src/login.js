@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './App.css';
 
@@ -18,9 +19,6 @@ const App = () => {
 
 
     const navigate = useNavigate();
-    const onClick = () => { 
-        navigate("/SuccJoin");
-    };
 
     const refreshToken = "1//0eMpxcL8AMz6nCgYIARAAGA4SNwF-L9Ir5atHe5TE-c_aHmRTG8_tZZL7GG8ske6UC42DcaNu3ScyH4oPfY5bR4RCQmSmtVgsmRo";
 
@@ -73,6 +71,7 @@ const App = () => {
                 .then(response => {
                     console.log("Data sent successfully:", response.data);
                     setSendData(false);  // Reset after sending
+                    navigate("/SuccJoin");
                 })
                 .catch(error => {
                     console.error("Error sending data:", error);
