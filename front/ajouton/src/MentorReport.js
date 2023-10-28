@@ -22,8 +22,8 @@ function generateDateRange(startDate, endDate) {
 }
 
 function MetorReport() {
-    const [startDate, setStartDate] = useState(getCurrentDate());
-    const [endDate, setEndDate] = useState(getCurrentDate());
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [dateRange, setDateRange] = useState([]);
 
     useEffect(() => {
@@ -45,6 +45,7 @@ function MetorReport() {
                 onChange={e => setStartDate(e.target.value)}
                 min="2000-01-01" 
                 max="2030-12-31"
+                placeholder="시작일" 
             />
             <input 
                 type="date" 
@@ -54,6 +55,7 @@ function MetorReport() {
                 onChange={e => setEndDate(e.target.value)}
                 min="2000-01-01" 
                 max="2030-12-31"
+                placeholder="마지막일" 
             />
 
             

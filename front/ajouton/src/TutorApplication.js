@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './TutorApplication.css';
 
 function ToutorApplication() {
@@ -24,13 +25,11 @@ function ToutorApplication() {
         }
     }
 
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
         if (isFormComplete() && !isSubmitted) {
-            // Show the alert
-            alert('신청이 완료되었습니다!');
-            setIsSubmitted(true);
-            // You can also add additional logic here, like sending the form data to a server
+            navigate("/SuccApply");
         }
     };
 
@@ -91,7 +90,7 @@ function ToutorApplication() {
                     onChange={e => setTime(e.target.value)}
                     />
 
-<p className='menu'>장소</p>
+                <p className='menu'>장소</p>
                 <div>
                 <label>
                     <input 
@@ -128,7 +127,7 @@ function ToutorApplication() {
                         />
                     </div>
                 )}
-                
+
                 <p className='menu'>질문 내용</p>
                 <input 
                     className='qtext' 
