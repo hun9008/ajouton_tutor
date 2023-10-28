@@ -38,21 +38,22 @@ function ToutorApplication() {
     const [trainingLog, setTrainingLog] = useState([]);  // State for storing the response
 
     const handleSearchClick = () => {
-        const url = "http://localhost:8000/v1/api/getReservations";
+        const url = "https://pass.kksoft.kr:15823/v1/api/getReservations";
         const payload = {
             id: studentNumber,  // Using the studentNumber state
-            sbjCode: "SCE204"
+            sbjCode: "SCE214"
         };
 
         axios.post(url, payload)
             .then(response => {
-                setTrainingLog(response.data);
+                console.log(response);
+                setTrainingLog(response.data.reservations);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
     };
-
+    
     return (
         <div>
             <div className="top">
