@@ -26,14 +26,23 @@ function SuccApply() {
             lineHeight: "16px",
             textAlign: "center",
             margin: "auto",
+            marginTop: "50px",
         }
         
 
 
     return(
         <div>
-            <h1>튜터링 예약 신청을 완료했습니다.</h1>
-            <p>새로운 튜터링 예약을 신청하고 싶으시면 아래 버튼을 눌러주세요.</p>
+            <h1 style={{
+                textAlign: 'center',
+                marginTop: '100px',
+            }}>튜터링 예약 신청을 완료했습니다.</h1>
+            <p style={{
+                textAlign: 'center',
+                marginTop: '50px',
+            
+            }}>새로운 튜터링 예약을 신청하고 싶으시면 아래 버튼을 눌러주세요.</p>
+
             <button style={button} onClick={reapply}> 새로 신청하기</button>
         </div>
     );
