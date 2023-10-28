@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 
 function SuccJoin() {
-    // Define the URL you want to copy
+   
     const url = 'http://reservation.page/create';
 
     const handleCopy = () => {
-        // Create a new textarea element and set its value to the URL
+        
         const textarea = document.createElement("textarea");
         textarea.value = url;
         document.body.appendChild(textarea);
         
-        // Select the text and copy it
+       
         textarea.select();
         document.execCommand("copy");
         
-        // Remove the textarea from the DOM
         document.body.removeChild(textarea);
 
-        // Notify the user that the URL has been copied
+       
         alert("URL이 복사되었습니다!");
     };
 
@@ -39,7 +38,8 @@ function SuccJoin() {
                 height: '25px',
                 margin: 'auto'
             }}>
-                <p style={{ fontWeight: 'bold',  marginLeft: '10px'}}>http://reservation.page/create</p>
+                <p style={{ fontWeight: 'bold',  marginLeft: '10px'}}>
+                    http://reservation.page/create</p>
 
                 <button 
                     onClick={handleCopy}
@@ -56,9 +56,15 @@ function SuccJoin() {
                     URL 복사하기
                 </button>
             </div>
-
+            
+            <p>날짜 선택</p>
+            <input type="date" id="date" name="date" />
+            <p>시간 선택</p>
+            <input type="time" id="time" name="time" />
 
         </div>
+
+ 
     );
 }
 
