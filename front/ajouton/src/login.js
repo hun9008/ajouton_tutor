@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 // import axios from 'axios';
 import './App.css';
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from 'react-router';
 
 const App = () => {
     const [name, setName] = useState('');
@@ -12,6 +13,11 @@ const App = () => {
 
     const handleDownload = () => {
         setDownloaded(true);
+    };
+
+    const navigate = useNavigate();
+    const onClick = () => { 
+        navigate("/SuccJoin");
     };
 
     // const [token, setToken] = useState('');
@@ -112,7 +118,7 @@ const App = () => {
                     엑셀 다운로드
                 </a>
             )}
-            <button style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }}>
+            <button onClick={onClick} style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }}>
                 등록하기
             </button>
 

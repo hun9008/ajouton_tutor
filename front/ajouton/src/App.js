@@ -5,6 +5,7 @@ import TutorApplication from './TutorApplication';
 import MentorReport from './MentorReport';
 import Header from './Header';
 import SuccApply from './SuccApply';
+import SuccJoin from './SuccJoin';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/TutorApplication' element={<TutorApplication />} />
           <Route path='/MentorReport' element={<MentorReport />} />
           <Route path='/SuccApply' element={<SuccApply />} />
+          <Route path='/SuccJoin' element={<SuccJoin />} />
         </Routes>
       </Router>
     </div>
