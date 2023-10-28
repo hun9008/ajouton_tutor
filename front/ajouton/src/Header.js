@@ -7,7 +7,7 @@ function Header() {
 
     const navigate = useNavigate();
     const CreateLink = () => {
-            navigate("/");
+            navigate("/login");
           };
 
  
