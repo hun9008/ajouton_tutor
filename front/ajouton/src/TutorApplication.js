@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './TutorApplication.css';
 
 function ToutorApplication() {
@@ -34,6 +35,25 @@ function ToutorApplication() {
         }
     };
 
+    const [trainingLog, setTrainingLog] = useState([]);  // State for storing the response
+
+    const handleSearchClick = () => {
+        const url = "https://pass.kksoft.kr:15823/v1/api/getReservations";
+        const payload = {
+            id: studentNumber,  // Using the studentNumber state
+            sbjCode: "SCE214"
+        };
+
+        axios.post(url, payload)
+            .then(response => {
+                console.log(response);
+                setTrainingLog(response.data.reservations);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    };
+    
     return (
         <div>
             <div className="top">
@@ -73,7 +93,7 @@ function ToutorApplication() {
                     value={studentNumber}
                     onChange={e => setStudentNumber(e.target.value)}
                     />
-                    <button className='button1'>조회</button>
+                    <button className='button1' onClick={handleSearchClick}>조회</button>
 
                     <p className='menu'>날짜선택</p>
                     <input 
