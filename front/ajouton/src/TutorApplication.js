@@ -25,6 +25,7 @@ function ToutorApplication() {
         }
     }
 
+
     const navigate = useNavigate();
 
     const handleSubmit = () => {
@@ -76,15 +77,17 @@ function ToutorApplication() {
 
                     <p className='menu'>날짜선택</p>
                     <input 
-                    className='textbox' 
+                    className='datebox'
                     type="date"
                     value={date}
                     onChange={e => setDate(e.target.value)}
                     />
+
+                   
                     
                     <p className='menu'>시간선택</p>
                     <input 
-                    className='textbox' 
+                    className='timebox'
                     type="time"
                     value={time}
                     onChange={e => setTime(e.target.value)}

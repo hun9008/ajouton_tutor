@@ -116,3 +116,30 @@
     line-height: 16px; /* 100% */
  }
 
+.datebox {
+    display: flex;
+    width: 450px;
+    height: 15px;
+    padding: 19px 20px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 650px;
+    border-radius: 10px;
+    border: 1px solid var(--textfield, #BABABA);
+    background: #FFF;
+}
+
+.timebox {
+    display: flex;
+    width: 450px;
+    height: 15px;
+    padding: 19px 20px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 650px;
+    border-radius: 10px;
+    border: 1px solid var(--textfield, #BABABA);
+    background: #FFF;
+}

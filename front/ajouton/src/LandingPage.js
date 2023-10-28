@@ -46,7 +46,7 @@ function LandgingPage() {
         <div style={containerStyle}>
             <img style={{ 
                 width: '100%',
-                height: '100%', 
+                height: "100vh", 
                 objectFit: 'cover'
             }} src={LandingPage} alt="LandingPage" />
 
