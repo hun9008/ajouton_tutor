@@ -73,7 +73,7 @@ const App = () => {
                 .then(response => {
                     console.log("Data sent successfully:", response.data);
                     setSendData(false);  // Reset after sending
-                    navigate("/SuccJoin");
+                    navigate("/SuccJoin" , { state: { sbjCode: sbjCode } });
                 })
                 .catch(error => {
                     console.error("Error sending data:", error);
