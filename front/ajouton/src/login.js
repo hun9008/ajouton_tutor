@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-// import axios from 'axios';
+import { useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { useNavigate } from 'react-router';
+
+// import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const App = () => {
     const [name, setName] = useState('');
@@ -15,34 +16,72 @@ const App = () => {
         setDownloaded(true);
     };
 
+
     const navigate = useNavigate();
     const onClick = () => { 
         navigate("/SuccJoin");
     };
 
-    // const [token, setToken] = useState('');
+    const refreshToken = "1//0eMpxcL8AMz6nCgYIARAAGA4SNwF-L9Ir5atHe5TE-c_aHmRTG8_tZZL7GG8ske6UC42DcaNu3ScyH4oPfY5bR4RCQmSmtVgsmRo";
 
-    // const handleGoogleSuccess = async (response) => {
-    //     try {
-    //         // Use the authorization code to get the access and refresh tokens
-    //         const result = await axios.post('https://oauth2.googleapis.com/token', {
-    //             code: response.code,
-    //             client_id: '188993087518-sgpan8fbqrn6kfv9huu9j2rumgr536pu.apps.googleusercontent.com',
-    //             client_secret: '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',
-    //             redirect_uri: 'http://localhost:3000/',
-    //             grant_type: 'authorization_code',
+    // const [refreshToken, setRefreshToken] = useState("");
+    // useEffect(() => {
+    //     axios.get("https://pass.kksoft.kr:15823/v1/api/calendar/login", {maxRedirects: 0})
+    //         .then(response => {
+    //             if (response.status === 302) {
+    //                 const redirectURL = response.headers.location;
+    //                 return axios.get(redirectURL);  // Manually handle the redirection
+    //             }
+    //             return response;
+    //         })
+    //         .then(response => {
+    //             const token = response.data.refresh_token;  // Assuming the token is in the response's refresh_token property
+    //             setRefreshToken(token);
+    //         })
+    //         .catch(error => {
+    //             console.error("Error fetching refresh token:", error);
     //         });
+    // }, []);
 
-    //         const { access_token, refresh_token } = result.data;
+    const [sendData, setSendData] = useState(false);
+    const [encodedFile, setEncodedFile] = useState(""); // 상태 변수 추가
 
-    //         console.log('Access Token:', access_token);
-    //         console.log('Refresh Token:', refresh_token);
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const base64String = e.target.result.split(",")[1];
+                setEncodedFile(base64String);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
-    //         setToken(access_token);
-    //     } catch (error) {
-    //         console.error('Error getting tokens:', error.response);
-    //     }
-    // };
+    useEffect(() => {
+        if (sendData) {
+            const backendURL = "https://pass.kksoft.kr:15823/v1/api/register";  // Replace with actual backend URL
+            const data = {
+                name: name,
+                email: email,
+                className: className,
+                classInfo: classInfo,
+                encodedFile: encodedFile,
+                refresh_token: refreshToken
+            };
+            axios.post(backendURL, data)
+                .then(response => {
+                    console.log("Data sent successfully:", response.data);
+                    setSendData(false);  // Reset after sending
+                })
+                .catch(error => {
+                    console.error("Error sending data:", error);
+                    setSendData(false);  // Reset even if there's an error
+                });
+        }
+    }, [sendData, name, email, className, classInfo, encodedFile, refreshToken]);
+
+
   
 
     return (
@@ -89,36 +128,32 @@ const App = () => {
             <br/>
             <div style={{marginRight:320 ,fontWeight: 'bold', fontSize: 20}}>구글 캘린더</div>
             <br/>
-            <GoogleOAuthProvider
-                clientId="188993087518-sgpan8fbqrn6kfv9huu9j2rumgr536pu.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                scope="https://www.googleapis.com/auth/calendar">
-                <div>
-                <GoogleLogin
-                    responseType="code"
-                    onSuccess={(credentialResponse) => {
-                        console.log(credentialResponse)
-                        console.log('Token:', credentialResponse.access_token);
-                    }}
-                    // onSuccess={handleGoogleSuccess}
-                    onError={() =>{
-                        console.log('login fail');
-                    }}
-                    width="300px"
-                    useOnTap
-                />
-                </div>
-            </GoogleOAuthProvider>
+            <a href="https://pass.kksoft.kr:15823/v1/api/calendar/login" target="_blank" rel="noopener noreferrer">
+                <button style={{ width: "300px", height: "40px" }}
+                // onClick={() => {
+                //     setTimeout(() => {
+                //         axios.get("https://pass.kksoft.kr:15823/v1/api/calendar/login")
+                //             .then(response => {
+                //                 const token = response.data.refresh_token;  // Assuming the token is in the response's refresh_token property
+                //                 setRefreshToken(token);
+                //             })
+                //             .catch(error => {
+                //                 console.error("Error fetching refresh token:", error);
+                //             });
+                //     }, 10000);  // 10 seconds delay
+                // }}
+                >Calendar Login</button>
+            </a>
             <br/>
             <div style={{marginRight:330, fontWeight: 'bold', fontSize: 20}}>튜티 정보</div>
             {downloaded ? (
-                <input type="file" accept=".xlsx" /> 
+                <input type="file" accept=".xlsx" onChange={handleFileChange}/> 
             ) : (
                 <a href="/myExcel.xlsx" download className="download-button" onClick={handleDownload}>
                     엑셀 다운로드
                 </a>
             )}
-            <button onClick={onClick} style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }}>
+            <button style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }} onClick={() => setSendData(true)}>
                 등록하기
             </button>
 
