@@ -1,10 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Header() {
 
-    
+    const navigate = useNavigate();
+    const CreateLink = () => {
+            navigate("/");
+          };
+
+    const PDFdownload = () => {
+       navigate("/MentorReport");
+    };
+   
 
 
     const headerStyle = {
@@ -47,8 +56,8 @@ function Header() {
 
 
             <div style={subMenu}>
-            <p>예약 링크 생성</p>
-            <p>활동일지 다운로드</p>
+            <p onClick={CreateLink}>예약 링크 생성</p>
+            <p onClick={PDFdownload}>활동일지 다운로드</p>
             </div>
 
         </div>

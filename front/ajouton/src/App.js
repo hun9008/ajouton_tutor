@@ -8,9 +8,8 @@ import Header from './Header';
 function App() {
   return (
     <div className="App">
-      <Header />
-
       <Router>
+        <Header />
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/TutorApplication' element={<TutorApplication />} />
@@ -22,6 +21,3 @@ function App() {
 }
 
 export default App;
-
-
-
