@@ -41,9 +41,6 @@ const App = () => {
 
     return (
         <div className="login">
-            <div className="bar">
-                <div className="bar_text">amento</div>
-            </div>
             <div style={{marginRight:340, marginTop: 80, fontWeight: 'bold', fontSize: 20}}>튜터 정보</div>
             <br/>
             <div style={{marginRight:370, marginBottom: 10}}>이름</div>

@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom"; 
-import MetorReport from "./MentorReport";
+
+
 
 function Header() {
+
+    
+
+
     const headerStyle = {
         background: "#405678",
         display: "flex",
@@ -18,21 +22,35 @@ function Header() {
         flexShrink: 0,
         marginLeft: "1000px",
         gap : "15px",
+
         color:"#FFF",
         size: "18px",
         style: "normal",
         weight: "700",
     }
 
+
+    const bar_text= {
+        textalign: "center",
+        font: "Frieda",
+        size: "40px",
+        style: "normal",
+        weight: "400",
+       height: "37px", 
+        marginleft: "30px",
+        color:"#FFF",
+      }
+
     return (
         <div style={headerStyle}>
-            <h1 className="title">멘토</h1>
+            <div style={bar_text}>amento</div>
+
+
             <div style={subMenu}>
-                <p>예약 링크 생성</p>
-               
-                    <p Link to="/MentorReport">활동일지 내보내기</p>
-               
+            <p>예약 링크 생성</p>
+            <p>활동일지 다운로드</p>
             </div>
+
         </div>
     );
 }
