@@ -1,0 +1,118 @@
+.title {
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+    
+}
+
+.top {
+    width: 1140px;
+    margin-top: 90px;
+    margin-left: 500px;
+}
+
+.inst {
+    margin-top: 20px;
+    margin-left: 500px;
+    
+    text-align: left;
+    line-height: 2; 
+}
+
+.line {
+    width: 1140px;
+    height: 1px;
+    background: #BABABA;
+    margin-left: 500px;
+}
+
+.bold {
+    color: var(--title, #19212F);
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: -344px;
+    margin-top: 90px;
+}
+
+.menu {
+    color: var(--text, #4D4D4D);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: -700px;
+}
+
+.button1{
+    display: flex;
+    width: 150px;
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 0px 10px 10px 0px;
+    background: var(--primary-color, #405678);
+    margin-left: 993px;
+    margin-top: -55px;
+
+    color: #EDEFF3;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 100% */
+}
+
+.textbox{
+    display: flex;
+    width: 450px;
+    height: 15px;
+    padding: 19px 20px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 650px;
+    border-radius: 10px;
+    border: 1px solid var(--textfield, #BABABA);
+    background: #FFF;
+}
+
+.qtext {
+    display: flex;
+    width: 753px;
+    height: 230px;
+    padding: 19px 20px;
+    align-items: flex-start;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--textfield, #BABABA);
+    background: #FFF;
+    margin-left: 650px;
+ }
+
+ .button2{
+    display: flex;
+    width: 300px;
+    height: 54px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 104px;
+    margin-left: 650px;
+    border-radius: 10px;
+ }
+
+ .button2.active {
+    
+    background: var(--primary-color, #405678);
+
+    color: #EDEFF3;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 100% */
+ }
+

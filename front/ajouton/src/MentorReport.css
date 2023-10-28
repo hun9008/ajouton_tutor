@@ -1,0 +1,18 @@
+.button{
+    display: flex;
+    width: 150px;
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 10px 10px 10px 10px;
+    background: var(--primary-color, #405678);
+    margin-left: 993px;
+    margin-top: 100px;
+
+    color: #EDEFF3;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 100% */
+}
