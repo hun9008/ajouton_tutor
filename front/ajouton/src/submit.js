@@ -119,9 +119,7 @@ class Submit extends Component {
             style={{ display: 'none' }}
           />
         </div>
-        
         <div className="actions">
-        
         </div>
       </div>
     );
