@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from './button';
 import './submit.css';
 
 class Submit extends Component {
@@ -8,20 +7,36 @@ class Submit extends Component {
     this.fileInput = React.createRef();
     this.state = {
       selectedFiles: [],
-      fileAttached: false
+      fileAttached: false,
+      title: "", // 학번
+      description: "" // 학습 내용
     };
+    
   }
 
   handleUploadClick = () => {
     this.fileInput.current.click();
   };
 
-  handleFileChange = (e) => {
+  handleFileChange = async (e) => {
     const files = e.target.files;
     const selectedFiles = [];
+    
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const previewURL = URL.createObjectURL(file);
+      let previewURL = URL.createObjectURL(file);
+
+      // 파일 확장자가 .txt 인 경우 UTF-8로 파일 내용 읽고 새로운 미리보기 URL 생성
+      if (file.name.endsWith('.txt')) {
+        try {
+          const content = await this.readFileAsText(file);
+          const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+          previewURL = URL.createObjectURL(blob);
+        } catch (error) {
+          console.error("파일 읽기 중 에러 발생:", error);
+        }
+      }
+
       selectedFiles.push({ 
         name: file.name, 
         previewURL,
@@ -29,8 +44,24 @@ class Submit extends Component {
         size: (file.size / 1024).toFixed(2) + ' KB'
       });
     }
+
     this.setState({ selectedFiles, fileAttached: true });
-  };
+    e.target.value = null;
+};
+
+readFileAsText = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      resolve(event.target.result);
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+    reader.readAsText(file, 'UTF-8');
+  });
+};
+
   
   handleFileRemove = (indexToRemove) => {
     this.setState(prevState => ({
@@ -46,17 +77,38 @@ class Submit extends Component {
 
   // 저장 버튼 클릭 이벤트
   handleSaveClick = () => {
-    console.log("저장 버튼 클릭됨");
+    const currentDate = new Date();  // 현재 날짜와 시간을 얻습니다.
+    
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const hours = String(currentDate.getHours()).padStart(2, '0');
+    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+
+    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
+
+    console.log("저장된 날짜와 시간:", formattedDateTime);
     // 저장 로직 추가
+  };
+
+  handleTitleChange = (e) => {
+    const value = e.target.value;
+    const filteredValue = value.replace(/[^0-9]/g, ''); // 숫자가 아닌 모든 문자 제거
+    this.setState({ title: filteredValue });
+  };
+
+  handleDescriptionChange = (e) => {
+    this.setState({ description: e.target.value });
   };
 
   render() {
     const { selectedFiles } = this.state;
-
+    const isFormFilled = this.state.title.trim() !== "" && this.state.description.trim() !== "";
     return (
       <div className="container">
-        <h2>튜터링 활동 만족도 조사</h2>
-        <p>이 설문조사는 매 튜터링 활동이 끝날때마다 작성하는 것입니다. 효율적인 튜터링 활동 일지를 위한 것이니 성실하게 작성해주시길 바랍니다.</p>
+        <h2>튜터링 활동 기록</h2>
+        <p>튜티는 매 튜터링 활동이 끝날때마다 튜터링 활동 기록을 작성해야 합니다. 효율적인 튜터링 활동을 위한 것이니 성실하게 작성해주시길 바랍니다.</p>
         
         {/* 제목 섹션 */}
         <div className="section">
@@ -64,18 +116,19 @@ class Submit extends Component {
           <input 
             type="text" 
             placeholder="학번을 입력하세요"
-            onKeyPress={(event) => {
-              if (!/[0-9]/.test(event.key)) {
-                event.preventDefault();
-              }
-            }}
+            value={this.state.title}
+            onChange={this.handleTitleChange}
           />
         </div>
 
         {/* 설명란 섹션 */}
         <div className="section">
           <label>학습 내용</label>
-          <textarea placeholder="오늘 튜터링을 통해서 학습한 내용에 대해 간략하게 정리해주세요"></textarea>
+          <textarea 
+            placeholder="오늘 튜터링을 통해서 학습한 내용에 대해 간략하게 정리해주세요"
+            value={this.state.description}
+            onChange={this.handleDescriptionChange}
+          ></textarea>
         </div>
 
         {/* 첨부파일 섹션 */}
@@ -107,8 +160,7 @@ class Submit extends Component {
               ) : (
                 <div className="file-placeholder">오늘 튜터링 활동할 사진을 찍어서 업로드해주세요</div>
               )}
-            </div>
-            <Button className="absolute-button" onClick={this.handleUploadClick}>사진 촬영</Button>
+            </div><button className="absolute-button" onClick={this.handleUploadClick}>사진 촬영</button>
           </div>
           <input
             type="file"
@@ -120,6 +172,10 @@ class Submit extends Component {
           />
         </div>
         <div className="actions">
+          {(isFormFilled) & (selectedFiles.length) > 0 ? 
+            <button className="button-save-enabled" onClick={this.handleSaveClick}>저장</button> :
+            <button className="button-save-disabled">저장</button>
+          }
         </div>
       </div>
     );
