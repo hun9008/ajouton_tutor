@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './TutorApplication.css';
@@ -76,6 +77,24 @@ function ToutorApplication() {
             });
     };
 
+    const [noDate, setNoDate] = useState([]);
+
+    useEffect(() => {
+        const url = "https://pass.kksoft.kr:15823/v1/api/blocks";
+        const payload = {
+            sbjCode: sbjCode,
+        };
+
+        axios.post(url, payload)
+            .then(response => {
+                console.log(response);
+                setNoDate(response.data.reservations);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    }, []);  
+
     
     return (
         <div>
@@ -133,6 +152,8 @@ function ToutorApplication() {
                     className='timebox'
                     type="time"
                     value={time}
+                    min="09:00"
+                    max="17:00"
                     onChange={e => setTime(e.target.value)}
                     />
 

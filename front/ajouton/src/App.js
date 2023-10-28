@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-import Login from './login';
-import Submit from './submit'; // Submit 컴포넌트를 임포트
-import './App.css';
-import './submit.css';
-=======
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import './App.css';
 import Login from './login';
 import TutorApplication from './TutorApplication';
@@ -14,15 +7,12 @@ import Header from './Header';
 import SuccApply from './SuccApply';
 import SuccJoin from './SuccJoin';
 import LandgingPage from './LandingPage';
->>>>>>> 84cd41d596aab73f245df41754990733aefa5beb
+import SubMit from './submit';
+
 
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
-      <Login />
-      <Submit />
-=======
       <Router>
         <Header />
         <Routes>
@@ -32,9 +22,9 @@ function App() {
           <Route path='/MentorReport' element={<MentorReport />} />
           <Route path='/SuccApply' element={<SuccApply />} />
           <Route path='/SuccJoin' element={<SuccJoin />} />
+          <Route path='/SubMit' element={<SubMit />} />
         </Routes>
       </Router>
->>>>>>> 84cd41d596aab73f245df41754990733aefa5beb
     </div>
   );
 }

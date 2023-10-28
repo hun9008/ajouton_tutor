@@ -86,9 +86,10 @@ readFileAsText = (file) => {
     const minutes = String(currentDate.getMinutes()).padStart(2, '0');
     const seconds = String(currentDate.getSeconds()).padStart(2, '0');
 
-    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
+    const formattedDate = `${year}-${month}-${day}` 
+    const formattedTime = `${hours}:${minutes}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
 
-    console.log("저장된 날짜와 시간:", formattedDateTime);
+    console.log("저장된 날짜와 시간:", formattedDate, formattedTime);
     // 저장 로직 추가
   };
 

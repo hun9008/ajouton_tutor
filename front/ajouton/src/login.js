@@ -12,6 +12,7 @@ const App = () => {
     const [className, setClassName] = useState('');
     const [classInfo, setClassInfo] = useState('');
     const [downloaded, setDownloaded] = useState(false);
+    const [sbjCode, setSbjCode] = useState('');
 
     const handleDownload = () => {
         setDownloaded(true);
@@ -65,7 +66,8 @@ const App = () => {
                 className: className,
                 classInfo: classInfo,
                 encodedFile: encodedFile,
-                refresh_token: refreshToken
+                refresh_token: refreshToken,
+                sbjCode: sbjCode,
             };
             axios.post(backendURL, data)
                 .then(response => {
@@ -78,7 +80,7 @@ const App = () => {
                     setSendData(false);  // Reset even if there's an error
                 });
         }
-    }, [sendData, name, email, className, classInfo, encodedFile, refreshToken]);
+    }, [sendData, name, email, className, classInfo, encodedFile, refreshToken, sbjCode]);
 
 
   
@@ -114,6 +116,15 @@ const App = () => {
                 placeholder="수업이름을 입력해주세요..." 
                 value={className} 
                 onChange={e => setClassName(e.target.value)}
+            />
+            <br/>
+            <div style={{marginRight:360, marginBottom: 10}}>수업코드</div>
+            <input 
+                className='textbox' 
+                type="text" 
+                placeholder="수업코드를 입력해주세요..." 
+                value={sbjCode} 
+                onChange={e => setSbjCode(e.target.value)}
             />
             <br/>
             <div style={{marginRight:340, marginBottom: 10}}>수업정보</div>
