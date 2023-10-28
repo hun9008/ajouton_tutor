@@ -4,17 +4,20 @@ import './App.css';
 import TutorApplication from './TutorApplication';
 import MentorReport from './MentorReport';
 import Header from './Header';
+import SuccApply from './SuccApply';
+import SuccJoin from './SuccJoin';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-
       <Router>
+        <Header />
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/TutorApplication' element={<TutorApplication />} />
           <Route path='/MentorReport' element={<MentorReport />} />
+          <Route path='/SuccApply' element={<SuccApply />} />
+          <Route path='/SuccJoin' element={<SuccJoin />} />
         </Routes>
       </Router>
     </div>
@@ -22,6 +25,3 @@ function App() {
 }
 
 export default App;
-
-
-

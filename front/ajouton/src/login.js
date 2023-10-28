@@ -16,6 +16,12 @@ const App = () => {
         setDownloaded(true);
     };
 
+
+    const navigate = useNavigate();
+    const onClick = () => { 
+        navigate("/SuccJoin");
+    };
+
     const refreshToken = "1//0eMpxcL8AMz6nCgYIARAAGA4SNwF-L9Ir5atHe5TE-c_aHmRTG8_tZZL7GG8ske6UC42DcaNu3ScyH4oPfY5bR4RCQmSmtVgsmRo";
 
     // const [refreshToken, setRefreshToken] = useState("");
@@ -83,16 +89,18 @@ const App = () => {
             <div style={{marginRight:340, marginTop: 80, fontWeight: 'bold', fontSize: 20}}>튜터 정보</div>
             <br/>
             <div style={{marginRight:370, marginBottom: 10}}>이름</div>
-            <textarea 
-                className="textBox" 
+            <input 
+                className='textbox' 
+                type="text"
                 placeholder="이름을 입력해주세요..." 
                 value={name} 
                 onChange={e => setName(e.target.value)}
             />
             <br/>
             <div style={{marginRight:360, marginBottom: 10}}>이메일</div>
-            <textarea 
-                className="textBox" 
+            <input 
+                className='textbox' 
+                type="text" 
                 placeholder="이메일을 입력해주세요..." 
                 value={email} 
                 onChange={e => setEmail(e.target.value)}
@@ -101,16 +109,18 @@ const App = () => {
             <div style={{marginRight:340, fontWeight: 'bold', fontSize: 20}}>과목 정보</div>
             <br/>
             <div style={{marginRight:360, marginBottom: 10}}>수업명</div>
-            <textarea 
-                className="textBox" 
+            <input 
+                className='textbox' 
+                type="text" 
                 placeholder="수업이름을 입력해주세요..." 
                 value={className} 
                 onChange={e => setClassName(e.target.value)}
             />
             <br/>
             <div style={{marginRight:340, marginBottom: 10}}>수업정보</div>
-            <textarea 
-                className="textBox" 
+            <input 
+                className='textbox' 
+                type="text" 
                 placeholder="수업정보를 입력해주세요..." 
                 value={classInfo} 
                 onChange={e => setClassInfo(e.target.value)}
