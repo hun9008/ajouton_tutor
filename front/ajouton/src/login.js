@@ -85,7 +85,7 @@ const App = () => {
 
     return (
         <div className="login">
-            <div style={{marginRight:340, marginTop: 80, fontWeight: 'bold', fontSize: 20}}>튜터 정보</div>
+            <div style={{marginLeft:-295, marginTop: 80, fontWeight: 'bold', fontSize: 20}}>튜터/팀장 정보</div>
             <br/>
             <div style={{marginRight:370, marginBottom: 10}}>이름</div>
             <input 
@@ -105,9 +105,9 @@ const App = () => {
                 onChange={e => setEmail(e.target.value)}
             />
             <br/>
-            <div style={{marginRight:340, fontWeight: 'bold', fontSize: 20}}>과목 정보</div>
+            <div style={{marginLeft:-270, fontWeight: 'bold', fontSize: 20, marginTop:35}}>과목/스터디 정보</div>
             <br/>
-            <div style={{marginRight:360, marginBottom: 10}}>수업명</div>
+            <div style={{marginLeft:-310, marginBottom: 10}}>수업/스터디명</div>
             <input 
                 className='textbox' 
                 type="text" 
@@ -116,7 +116,7 @@ const App = () => {
                 onChange={e => setClassName(e.target.value)}
             />
             <br/>
-            <div style={{marginRight:340, marginBottom: 10}}>수업정보</div>
+            <div style={{marginLeft:-290, marginBottom: 10}}>수업/스터디 정보</div>
             <input 
                 className='textbox' 
                 type="text" 
@@ -125,8 +125,11 @@ const App = () => {
                 onChange={e => setClassInfo(e.target.value)}
             />
             <br/>
-            <div style={{marginRight:320 ,fontWeight: 'bold', fontSize: 20}}>구글 캘린더</div>
+            
+
+            <div style={{marginRight:287 ,fontWeight: 'bold', fontSize: 20,marginTop:35}}>Google 캘린더</div>
             <br/>
+          
             <a href="https://pass.kksoft.kr:15823/v1/api/calendar/login" target="_blank" rel="noopener noreferrer">
                 <button style={{ width: "300px", height: "40px" }}
                 // onClick={() => {
@@ -142,9 +145,11 @@ const App = () => {
                 //     }, 10000);  // 10 seconds delay
                 // }}
                 >Calendar Login</button>
+                
             </a>
+            
             <br/>
-            <div style={{marginRight:330, fontWeight: 'bold', fontSize: 20}}>튜티 정보</div>
+            <div style={{marginRight:330, fontWeight: 'bold', fontSize: 20,marginTop:35}}>튜티 정보</div>
             {downloaded ? (
                 <input type="file" accept=".xlsx" onChange={handleFileChange}/> 
             ) : (
