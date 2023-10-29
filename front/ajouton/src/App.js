@@ -1,8 +1,5 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import React, { useEffect } from 'react';
-
-
+import Login from './login';
+import Submit from './submit'; // Submit 컴포넌트를 임포트
 import './App.css';
 import Login from './login';
 import TutorApplication from './TutorApplication';

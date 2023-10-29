@@ -20,7 +20,7 @@ function Header() {
     const headerStyle = {
         background: "#405678",
         display: "flex",
-        width: "1440p",  // 유연하게 화면 전체 폭을 사용
+        width: "200px",  // 유연하게 화면 전체 폭을 사용
         height: "50px",
         padding: "30px 1245px 24px 43px",
         alignItems: "center",

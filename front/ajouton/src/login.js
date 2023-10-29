@@ -129,15 +129,6 @@ const App = () => {
                 onChange={e => setClassName(e.target.value)}
             />
             <br/>
-            <div style={{marginRight:350, marginBottom: 10}}>수업코드</div>
-            <input 
-                style={textcont} 
-                type="text" 
-                placeholder="수업코드를 입력해주세요..." 
-                value={sbjCode} 
-                onChange={e => setSbjCode(e.target.value)}
-            />
-            <br/>
             <div style={{marginLeft:-290, marginBottom: 10}}>수업/스터디 정보</div>
             <input 
                 style={textcont} 

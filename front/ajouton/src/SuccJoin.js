@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useLocation } from 'react-router-dom';
 
 function SuccJoin() {
-   
-    const url = 'http://reservation.page/create';
-
+    const location = useLocation();
+    const receivedSbjCode = location.state?.sbjCode;
+    console.log(receivedSbjCode);
+    const url = `http://reservation.page/create/${receivedSbjCode}`;
+    
     const handleCopy = () => {
         
         const textarea = document.createElement("textarea");
@@ -46,7 +49,7 @@ function SuccJoin() {
                 marginTop: '50px',
             }}>
                 <p style={{ fontWeight: 'bold',  marginLeft: '10px'}}>
-                    http://reservation.page/create</p>
+                    {url}</p>
 
                     <button 
                     onClick={handleCopy}
@@ -57,13 +60,13 @@ function SuccJoin() {
                         padding: '10px 10px',
                         borderRadius: '5px',
                         cursor: 'pointer',
-                        marginLeft: '50px',
+                        marginLeft: '100px',
                         alignItems: 'right',
+                        height: '40px'
                     }}>
-                    URL 복사하기
+                     COPY     
                 </button>
             </div>
-
 
         </div>
 
