@@ -98,10 +98,12 @@ readFileAsText = (file) => {
     }) 
     .then(response => {
       console.log("Data submitted successfully:", response.data);
+      alert('데이터가 성공적으로 저장되었습니다!');
     })
     .catch(error => {
       console.error("Error submitting data:", error);
     });
+ 
     // 저장 로직 추가
   };
 

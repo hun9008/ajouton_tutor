@@ -49,7 +49,13 @@ function ToutorApplication() {
         axios.post(url, payload)
             .then(response => {
                 console.log(response);
-                setTrainingLog(response.data.reservations);
+                if (response.data.reservations && response.data.reservations.length > 0) {
+                    setTrainingLog(response.data.reservations);
+                    alert(`조회된 데이터가 ${response.data.reservations.length}건 있습니다.`);
+            
+                } else {
+                    alert('조회된 데이터가 없습니다.');
+                }
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
@@ -124,7 +130,7 @@ function ToutorApplication() {
                     value={studentNumber}
                     onChange={e => setStudentNumber(e.target.value)}
                     />
-                    <button className='button1' onClick={handleSearchClick}>조회</button>
+                    <button  className='button1' onClick={handleSearchClick}>조회</button>
 
                     <p className='menu'>날짜선택</p>
                     <input 

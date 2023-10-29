@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './MentorReport.css';
-
-function getCurrentDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
+import axios from "axios";
 
 function generateDateRange(startDate, endDate) {
     const start = new Date(startDate);
@@ -30,11 +23,30 @@ function MetorReport() {
         setDateRange(generateDateRange(startDate, endDate));
     }, [startDate, endDate]);
 
+    const handleGeneratePDF = async () => {
+        const url = 'https://pass.kksoft.kr:15823/v1/api/download';
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    'start-date': startDate,
+                    'end-date': endDate
+                },
+                responseType: 'blob' // Add this line
+            });
+            
+            // Convert the blob into a URL and open in a new tab
+            const blobURL = URL.createObjectURL(response.data);
+            window.open(blobURL, '_blank');
+
+        } catch (error) {
+            console.error("Error fetching data from backend:", error);
+        }
+    }
 
     return (
         <div>
-            <p className="title">튜터링 활동일지 다운로드</p>
-            <p>자동으로 기록된 튜터링 활동들을 PDF로 간편한 활동일지를 만들어보세요! 
+            <h2 className="title">튜터링 활동일지 다운로드</h2>
+            <p>자동으로 기록된 튜터링 활동들을 PDF로 간편한 활동일지를 만들어보세요!<br/> 
                 활동일지를 만들고자 하는 날짜를 선택해주세요.</p>
             <h1>활동 기간을 선택해주세요</h1>
             <input 
@@ -47,6 +59,7 @@ function MetorReport() {
                 max="2030-12-31"
                 placeholder="시작일" 
             />
+            <span> ~ </span>
             <input 
                 type="date" 
                 id="end" 
@@ -58,22 +71,9 @@ function MetorReport() {
                 placeholder="마지막일" 
             />
 
-            
-
-            <div className="dateContainer">
-                {dateRange.map((date, idx) => (
-                    <div key={idx} className="individualDate">
-                        <label>
-                            <input type="checkbox" value={date} />
-                            {date}
-                        </label>
-                    </div>
-                ))}
-            </div>
-
-            <button className="button">PDF 파일생성</button>
-            </div>
-            );
-            }
+            <button className="button" onClick={handleGeneratePDF}>PDF 파일생성</button>
+        </div>
+    );
+}
 
 export default MetorReport;
