@@ -12,6 +12,7 @@ const App = () => {
     const [className, setClassName] = useState('');
     const [classInfo, setClassInfo] = useState('');
     const [downloaded, setDownloaded] = useState(false);
+    const [sbjCode, setSbjCode] = useState('');
 
     const handleDownload = () => {
         setDownloaded(true);
@@ -65,22 +66,34 @@ const App = () => {
                 className: className,
                 classInfo: classInfo,
                 encodedFile: encodedFile,
-                refresh_token: refreshToken
+                refresh_token: refreshToken,
+                sbjCode: sbjCode,
             };
             axios.post(backendURL, data)
                 .then(response => {
                     console.log("Data sent successfully:", response.data);
                     setSendData(false);  // Reset after sending
-                    navigate("/SuccJoin");
+                    navigate("/SuccJoin" , { state: { sbjCode: sbjCode } });
                 })
                 .catch(error => {
                     console.error("Error sending data:", error);
                     setSendData(false);  // Reset even if there's an error
                 });
         }
-    }, [sendData, name, email, className, classInfo, encodedFile, refreshToken]);
+    }, [sendData, name, email, className, classInfo, encodedFile, refreshToken, sbjCode]);
 
+    const textcont = {
 
+        width: "400px",
+        height: "40px",
+        border: "1px solid var(--textfield, #BABABA)",
+        borderRadius: "5px",
+        padding: "5px",
+        fontSize: "15px",
+        marginBottom: "10px",
+        marginRight: "10px",
+        marginLeft: "-10px"
+    }
   
 
     return (
@@ -89,7 +102,7 @@ const App = () => {
             <br/>
             <div style={{marginRight:370, marginBottom: 10}}>이름</div>
             <input 
-                className='textbox' 
+                style={textcont} 
                 type="text"
                 placeholder="이름을 입력해주세요..." 
                 value={name} 
@@ -98,7 +111,7 @@ const App = () => {
             <br/>
             <div style={{marginRight:360, marginBottom: 10}}>이메일</div>
             <input 
-                className='textbox' 
+                style={textcont} 
                 type="text" 
                 placeholder="이메일을 입력해주세요..." 
                 value={email} 
@@ -109,16 +122,25 @@ const App = () => {
             <br/>
             <div style={{marginLeft:-310, marginBottom: 10}}>수업/스터디명</div>
             <input 
-                className='textbox' 
+                style={textcont} 
                 type="text" 
                 placeholder="수업이름을 입력해주세요..." 
                 value={className} 
                 onChange={e => setClassName(e.target.value)}
             />
             <br/>
+            <div style={{marginRight:350, marginBottom: 10}}>수업코드</div>
+            <input 
+                style={textcont} 
+                type="text" 
+                placeholder="수업코드를 입력해주세요..." 
+                value={sbjCode} 
+                onChange={e => setSbjCode(e.target.value)}
+            />
+            <br/>
             <div style={{marginLeft:-290, marginBottom: 10}}>수업/스터디 정보</div>
             <input 
-                className='textbox' 
+                style={textcont} 
                 type="text" 
                 placeholder="수업정보를 입력해주세요..." 
                 value={classInfo} 
@@ -131,7 +153,7 @@ const App = () => {
             <br/>
           
             <a href="https://pass.kksoft.kr:15823/v1/api/calendar/login" target="_blank" rel="noopener noreferrer">
-                <button style={{ width: "300px", height: "40px" }}
+                <button style={{ width: "300px", height: "40px",backgroundColor: "#405678", color: "white", border: "none", borderRadius: "5px", fontSize: "15px", marginBottom: "10px", marginRight: "10px", marginLeft: "-10px" }}
                 // onClick={() => {
                 //     setTimeout(() => {
                 //         axios.get("https://pass.kksoft.kr:15823/v1/api/calendar/login")
@@ -147,20 +169,36 @@ const App = () => {
                 >Calendar Login</button>
                 
             </a>
-            
             <br/>
-            <div style={{marginRight:330, fontWeight: 'bold', fontSize: 20,marginTop:35}}>튜티 정보</div>
-            {downloaded ? (
-                <input type="file" accept=".xlsx" onChange={handleFileChange}/> 
+<div style={{marginRight:250, fontWeight: 'bold', fontSize: 20,marginTop:35}}>튜티/스터디원 정보</div>
+{downloaded ? (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+        <button className="custom-file-upload">
+            파일 선택
+        </button>
+        <input 
+            type="file" 
+            accept=".xlsx" 
+            onChange={handleFileChange} 
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                opacity: 0,
+                cursor: 'pointer'
+                        }}
+                    />
+                </div>
             ) : (
                 <a href="/myExcel.xlsx" download className="download-button" onClick={handleDownload}>
                     엑셀 다운로드
                 </a>
             )}
-            <button style={{ marginTop: 20, padding: '10px 20px', fontSize: '15px' }} onClick={() => setSendData(true)}>
+            <button style={{backgroundColor: "#405678", marginTop: 20, padding: '10px 20px', fontSize: '15px' }} onClick={() => setSendData(true)}>
                 등록하기
             </button>
-
         </div>
     );
 }

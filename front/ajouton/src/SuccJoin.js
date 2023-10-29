@@ -63,20 +63,7 @@ function SuccJoin() {
                     URL 복사하기
                 </button>
             </div>
-            <button 
-                    onClick={handleCopy}
-                    style={{
-                        background: '#405678',
-                        color: '#EDEFF3',
-                        border: 'none',
-                        padding: '10px 10px',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        marginLeft: '50px',
-                        alignItems: 'right',
-                    }}>
-                    URL 복사하기
-                </button>
+
 
         </div>
 

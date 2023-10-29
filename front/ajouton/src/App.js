@@ -12,36 +12,8 @@ import SuccApply from './SuccApply';
 import SuccJoin from './SuccJoin';
 import LandgingPage from './LandingPage';
 import Random from './Random';
-import Submit from './Submit';
+import Submit from './submit';
 
-function ServeyPage() {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const randomString = queryParams.get('randomString');
-
-  console.log("Parsed randomString:", randomString);
-
-
-  useEffect(() => {
-    // 백엔드 서버로 랜덤 파라미터 변수 보내기
-    axios.post('https://your-backend-server.com/api/save-random', {
-      randomString: randomString
-    })
-    .then(response => {
-      console.log("Random string saved successfully:", response.data);
-    })
-    .catch(error => {
-      console.error("Error saving random string:", error);
-    });
-  }, [randomString]);
-
-
-  return (
-    <div>
-      Received Random String: {randomString}
-    </div>
-  );
-}
 
 function App() {
   return (
@@ -56,8 +28,7 @@ function App() {
           <Route path='/SuccApply' element={<SuccApply />} />
           <Route path='/SuccJoin' element={<SuccJoin />} />
           <Route path='/Random' element={<Random />} />
-          <Route path='/servey' element={<ServeyPage />} />
-          <Route path='/Submit' element={<Submit />} />
+          <Route path='/submit' element={<Submit />} />
         </Routes>
       </Router>
     </div>

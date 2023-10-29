@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { useEffect, useState } from 'react';
 import './submit.css';
+import axios from 'axios';
 
 class Submit extends Component {
   constructor(props) {
@@ -9,7 +11,8 @@ class Submit extends Component {
       selectedFiles: [],
       fileAttached: false,
       title: "", // 학번
-      description: "" // 학습 내용
+      description: "" ,// 학습 내용
+      randomString: props.randomString
     };
     
   }
@@ -18,36 +21,30 @@ class Submit extends Component {
     this.fileInput.current.click();
   };
 
-  handleFileChange = async (e) => {
+  
+  handleFileChange = (e) => {
+    
     const files = e.target.files;
     const selectedFiles = [];
     
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      let previewURL = URL.createObjectURL(file);
-
-      // 파일 확장자가 .txt 인 경우 UTF-8로 파일 내용 읽고 새로운 미리보기 URL 생성
-      if (file.name.endsWith('.txt')) {
-        try {
-          const content = await this.readFileAsText(file);
-          const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-          previewURL = URL.createObjectURL(blob);
-        } catch (error) {
-          console.error("파일 읽기 중 에러 발생:", error);
-        }
-      }
-
-      selectedFiles.push({ 
-        name: file.name, 
-        previewURL,
-        lastModifiedDate: file.lastModifiedDate.toLocaleDateString(),
-        size: (file.size / 1024).toFixed(2) + ' KB'
-      });
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        selectedFiles.push({ 
+          name: file.name, 
+          base64: reader.result.split(',')[1],  // base64 인코딩된 파일 데이터 추가
+          lastModifiedDate: file.lastModifiedDate.toLocaleDateString(),
+          size: (file.size / 1024).toFixed(2) + ' KB'
+        });
+        this.setState({ selectedFiles, fileAttached: true });
+      };
+      reader.readAsDataURL(file);
     }
-
-    this.setState({ selectedFiles, fileAttached: true });
+  
     e.target.value = null;
-};
+  };
+  
 
 readFileAsText = (file) => {
   return new Promise((resolve, reject) => {
@@ -85,10 +82,26 @@ readFileAsText = (file) => {
     const hours = String(currentDate.getHours()).padStart(2, '0');
     const minutes = String(currentDate.getMinutes()).padStart(2, '0');
     const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+    
 
-    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
+    const formattedDate = `${year}-${month}-${day}` 
+    const formattedTime = `${hours}:${minutes}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
 
-    console.log("저장된 날짜와 시간:", formattedDateTime);
+    console.log("저장된 날짜와 시간:", formattedDate, formattedTime);
+    const filesData = this.state.selectedFiles.map(file => file.base64);
+
+    axios.post('https://pass.kksoft.kr:15823/v1/api/servey', {
+      title: this.state.title,
+      description: this.state.description,
+      files: filesData,
+      randomString: this.state.randomString,
+    }) 
+    .then(response => {
+      console.log("Data submitted successfully:", response.data);
+    })
+    .catch(error => {
+      console.error("Error submitting data:", error);
+    });
     // 저장 로직 추가
   };
 

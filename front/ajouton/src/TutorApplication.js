@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './TutorApplication.css';
 
@@ -55,6 +55,11 @@ function ToutorApplication() {
                 console.error("Error fetching data:", error);
             });
     };
+    /////////////////////
+    const loc = useLocation();
+    const queryParams = new URLSearchParams(loc.search);
+    const randomString = queryParams.get('randomString');
+    /////////////////////
 
     const handleSubmitClick = () => {
         const url = "https://pass.kksoft.kr:15823/v1/api/submit";
@@ -66,6 +71,7 @@ function ToutorApplication() {
             locationType: locationType,
             location: location,
             sbjCode: sbjCode,
+            randomString: randomString
         };
 
         axios.post(url, payload)
