@@ -60,26 +60,13 @@ function SuccJoin() {
                         padding: '10px 10px',
                         borderRadius: '5px',
                         cursor: 'pointer',
-                        marginLeft: '50px',
+                        marginLeft: '100px',
                         alignItems: 'right',
+                        height: '40px'
                     }}>
-                    URL 복사하기
+                     COPY     
                 </button>
             </div>
-            <button 
-                    onClick={handleCopy}
-                    style={{
-                        background: '#405678',
-                        color: '#EDEFF3',
-                        border: 'none',
-                        padding: '10px 10px',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        marginLeft: '50px',
-                        alignItems: 'right',
-                    }}>
-                    URL 복사하기
-                </button>
 
         </div>
 

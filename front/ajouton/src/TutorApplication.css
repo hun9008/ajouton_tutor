@@ -6,14 +6,14 @@
 }
 
 .top {
-    width: 1140px;
+    /* width: 1140px; */
     margin-top: 90px;
-    margin-left: 500px;
+    margin-left: 150px;
 }
 
 .inst {
     margin-top: 20px;
-    margin-left: 500px;
+    margin-left: 150px;
     
     text-align: left;
     line-height: 2; 
@@ -23,7 +23,7 @@
     width: 1140px;
     height: 1px;
     background: #BABABA;
-    margin-left: 500px;
+    margin-left: 150px;
 }
 
 .bold {
@@ -32,7 +32,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-left: -344px;
+    margin-right: 100px;
     margin-top: 90px;
 }
 
@@ -42,20 +42,20 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-left: -700px;
+    margin-left: -500px;
 }
 
 .button1{
     display: flex;
     width: 150px;
-    height: 55px;
+    height: 37px;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
     border-radius: 0px 10px 10px 0px;
     background: var(--primary-color, #405678);
-    margin-left: 993px;
-    margin-top: -55px;
+    margin-left: 500px;
+    margin-top: -38px;
 
     color: #EDEFF3;
     font-size: 16px;
@@ -66,13 +66,13 @@
 
 .textbox{
     display: flex;
-    width: 450px;
+    width: 400px;
     height: 15px;
     padding: 19px 20px;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    margin-left: 650px;
+    margin-left: 30px;
     border-radius: 10px;
     border: 1px solid var(--textfield, #BABABA);
     background: #FFF;
@@ -89,7 +89,7 @@
     border-radius: 10px;
     border: 1px solid var(--textfield, #BABABA);
     background: #FFF;
-    margin-left: 650px;
+    margin-left: 30px;
  }
 
  .button2{
@@ -100,8 +100,9 @@
     align-items: center;
     flex-shrink: 0;
     margin-top: 104px;
-    margin-left: 650px;
+    margin-left: 200px;
     border-radius: 10px;
+    margin-bottom: 50px;
  }
 
  .button2.active {
@@ -118,13 +119,13 @@
 
 .datebox {
     display: flex;
-    width: 450px;
+    width: 580px;
     height: 15px;
     padding: 19px 20px;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    margin-left: 650px;
+    margin-left: 30px;
     border-radius: 10px;
     border: 1px solid var(--textfield, #BABABA);
     background: #FFF;
@@ -132,13 +133,13 @@
 
 .timebox {
     display: flex;
-    width: 450px;
+    width: 580px;
     height: 15px;
     padding: 19px 20px;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    margin-left: 650px;
+    margin-left: 30px;
     border-radius: 10px;
     border: 1px solid var(--textfield, #BABABA);
     background: #FFF;
