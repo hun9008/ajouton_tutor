@@ -87,10 +87,23 @@ readFileAsText = (file) => {
     const formattedDate = `${year}-${month}-${day}` 
     const formattedTime = `${hours}:${minutes}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
 
-    const formattedDate = `${year}-${month}-${day}` 
-    const formattedTime = `${hours}:${minutes}`;  // 'YYYY-MM-DD HH:MM:SS' 형식으로 날짜와 시간을 출력합니다.
-
     console.log("저장된 날짜와 시간:", formattedDate, formattedTime);
+    const filesData = this.state.selectedFiles.map(file => file.base64);
+
+    axios.post('https://pass.kksoft.kr:15823/v1/api/servey', {
+      title: this.state.title,
+      description: this.state.description,
+      files: filesData,
+      randomString: this.state.randomString,
+    }) 
+    .then(response => {
+      console.log("Data submitted successfully:", response.data);
+      alert('데이터가 성공적으로 저장되었습니다!');
+    })
+    .catch(error => {
+      console.error("Error submitting data:", error);
+    });
+ 
     // 저장 로직 추가
   };
 

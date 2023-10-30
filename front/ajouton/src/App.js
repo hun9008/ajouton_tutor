@@ -1,7 +1,6 @@
 import Login from './login';
-import Submit from './submit'; // Submit 컴포넌트를 임포트
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Login from './login';
 import TutorApplication from './TutorApplication';
 import MentorReport from './MentorReport';
 import Header from './Header';
